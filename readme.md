@@ -1,0 +1,77 @@
+# unist-util-source [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+
+[**Unist**][unist] utility to get the source of a [Node][] or
+[Location][].
+
+## Installation
+
+[npm][npm-install]:
+
+```bash
+npm install unist-util-source
+```
+
+## Usage
+
+```js
+var remark = require('remark');
+var source = require('./');
+
+remark()
+  .use(function () {
+    return transformer;
+    function transformer(tree, file) {
+      var list = tree.children[0].children[0];
+      console.log(source(list, file));
+    }
+  })
+  .process('> + **[Hello](./example)**\n> world.');
+```
+
+Yields:
+
+```txt
++ **[Hello](./example)**
+world.
+```
+
+## API
+
+### `source(value, file)`
+
+###### Parameters
+
+*   `value` ([`Node`][node] or [`Location`][location]) — Value to get.
+*   `file` ([`VFile`][vfile]) — Virtual file in which `value` exists.
+
+###### Returns
+
+`string?` — Source of `value` in `file`, if available.
+
+## License
+
+[MIT][license] © [Titus Wormer][author]
+
+<!-- Definitions -->
+
+[travis-badge]: https://img.shields.io/travis/wooorm/unist-util-source.svg
+
+[travis]: https://travis-ci.org/wooorm/unist-util-source
+
+[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/unist-util-source.svg
+
+[codecov]: https://codecov.io/github/wooorm/unist-util-source
+
+[npm-install]: https://docs.npmjs.com/cli/install
+
+[license]: LICENSE
+
+[author]: http://wooorm.com
+
+[unist]: https://github.com/wooorm/unist
+
+[node]: https://github.com/wooorm/unist#node
+
+[location]: https://github.com/wooorm/unist#location
+
+[vfile]: https://github.com/wooorm/vfile

@@ -1,0 +1,60 @@
+{
+  "name": "unist-util-source",
+  "version": "0.0.0",
+  "description": "Utility to get the source of a value",
+  "license": "MIT",
+  "keywords": [
+    "unist",
+    "node",
+    "location",
+    "source"
+  ],
+  "repository": "https://github.com/wooorm/unist-util-source.git",
+  "bugs": "https://github.com/wooorm/hast-util-to-html/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "dependencies": {
+    "vfile-location": "^2.0.1"
+  },
+  "files": [
+    "index.js"
+  ],
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "esmangle": "^1.0.1",
+    "nyc": "^8.1.0",
+    "remark": "^6.0.1",
+    "remark-cli": "^2.0.0",
+    "remark-preset-wooorm": "^1.0.0",
+    "tape": "^4.0.0",
+    "xo": "^0.16.0"
+  },
+  "scripts": {
+    "build-md": "remark . --quiet --frail",
+    "build-bundle": "browserify index.js --bare -s unistUtilSource > unist-util-source.js",
+    "build-mangle": "esmangle < unist-util-source.js > unist-util-source.min.js",
+    "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
+    "lint": "xo",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test",
+    "test": "npm run build && npm run lint && npm run test-coverage"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
+  },
+  "xo": {
+    "space": true,
+    "ignores": [
+      "unist-util-source.js"
+    ]
+  },
+  "remarkConfig": {
+    "output": true,
+    "presets": "wooorm"
+  }
+}
