@@ -1,6 +1,6 @@
 {
   "name": "unist-util-source",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Utility to get the source of a value",
   "license": "MIT",
   "keywords": [
