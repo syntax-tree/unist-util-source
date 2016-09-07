@@ -37,12 +37,13 @@ world.
 
 ## API
 
-### `source(value, file)`
+### `source(value, doc)`
 
 ###### Parameters
 
 *   `value` ([`Node`][node] or [`Location`][location]) — Value to get.
-*   `file` ([`VFile`][vfile]) — Virtual file in which `value` exists.
+*   `doc` ([`VFile`][vfile] or `string`) — Document in which `value`
+    exists.
 
 ###### Returns
 
