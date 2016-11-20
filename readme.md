@@ -5,7 +5,7 @@
 
 ## Installation
 
-[npm][npm-install]:
+[npm][]:
 
 ```bash
 npm install unist-util-source
@@ -63,7 +63,7 @@ world.
 
 [codecov]: https://codecov.io/github/wooorm/unist-util-source
 
-[npm-install]: https://docs.npmjs.com/cli/install
+[npm]: https://docs.npmjs.com/cli/install
 
 [license]: LICENSE
 
