@@ -1,19 +1,9 @@
-/**
- * @author Titus Wormer
- * @copyright 2016 Titus Wormer
- * @license MIT
- * @module unist:util:source
- * @fileoverview Test suite for `unit-util-source`.
- */
-
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var remark = require('remark');
 var source = require('./');
 
-/* Tests. */
 test('unist-util-source', function (t) {
   t.plan(10);
 

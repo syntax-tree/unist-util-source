@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2016 Titus Wormer
- * @license MIT
- * @module unist:util:source
- * @fileoverview Get the source of a node or location.
- */
-
 'use strict';
 
 var location = require('vfile-location');
