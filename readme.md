@@ -55,13 +55,13 @@ world.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/unist-util-source.svg
+[travis-badge]: https://img.shields.io/travis/syntax-tree/unist-util-source.svg
 
-[travis]: https://travis-ci.org/wooorm/unist-util-source
+[travis]: https://travis-ci.org/syntax-tree/unist-util-source
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/unist-util-source.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/syntax-tree/unist-util-source.svg
 
-[codecov]: https://codecov.io/github/wooorm/unist-util-source
+[codecov]: https://codecov.io/github/syntax-tree/unist-util-source
 
 [npm]: https://docs.npmjs.com/cli/install
 
@@ -69,10 +69,10 @@ world.
 
 [author]: http://wooorm.com
 
-[unist]: https://github.com/wooorm/unist
+[unist]: https://github.com/syntax-tree/unist
 
-[node]: https://github.com/wooorm/unist#node
+[node]: https://github.com/syntax-tree/unist#node
 
-[location]: https://github.com/wooorm/unist#location
+[location]: https://github.com/syntax-tree/unist#location
 
-[vfile]: https://github.com/wooorm/vfile
+[vfile]: https://github.com/vfile/vfile
