@@ -48,7 +48,7 @@ test('unist-util-source', function (t) {
       /* Missing. */
       t.equal(source(null, file), null);
     }
-  }).process([
+  }).processSync([
     '> + **[Hello](./example)**',
     '> world.'
   ].join('\n'));

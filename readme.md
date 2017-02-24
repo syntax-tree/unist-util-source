@@ -25,7 +25,7 @@ remark()
       console.log(source(list, file));
     }
   })
-  .process('> + **[Hello](./example)**\n> world.');
+  .processSync('> + **[Hello](./example)**\n> world.');
 ```
 
 Yields:
