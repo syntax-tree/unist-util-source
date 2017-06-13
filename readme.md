@@ -13,26 +13,33 @@ npm install unist-util-source
 
 ## Usage
 
-```js
-var remark = require('remark');
-var source = require('./');
+Say we have the following file, `example.md`:
 
-remark()
-  .use(function () {
-    return transformer;
-    function transformer(tree, file) {
-      var list = tree.children[0].children[0];
-      console.log(source(list, file));
-    }
-  })
-  .processSync('> + **[Hello](./example)**\n> world.');
+```markdown
+> + **[Hello](./example)**
+>   world.
 ```
 
-Yields:
+And our script, `example.js`, looks as follows:
 
-```txt
+```javascript
+var vfile = require('to-vfile');
+var unified = require('unified');
+var parse = require('remark-parse');
+var source = require('unist-util-source');
+
+var file = vfile.readSync('example.md');
+var tree = unified().use(parse).parse(file);
+
+var list = tree.children[0].children[0];
+console.log(source(list, file));
+```
+
+Now, running `node example` yields:
+
+```markdown
 + **[Hello](./example)**
-world.
+  world.
 ```
 
 ## API
