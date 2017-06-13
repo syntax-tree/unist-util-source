@@ -48,9 +48,8 @@ Now, running `node example` yields:
 
 ###### Parameters
 
-*   `value` ([`Node`][node] or [`Location`][location]) — Value to get.
-*   `doc` ([`VFile`][vfile] or `string`) — Document in which `value`
-    exists.
+*   `value` ([`Node`][node] or [`Location`][location]) — Value to get
+*   `doc` ([`VFile`][vfile] or `string`) — Document in which `value` exists
 
 ###### Returns
 
