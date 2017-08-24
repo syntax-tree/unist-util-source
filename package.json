@@ -6,7 +6,7 @@
   "keywords": [
     "unist",
     "node",
-    "location",
+    "position",
     "source"
   ],
   "repository": "https://github.com/syntax-tree/unist-util-source",

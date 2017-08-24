@@ -1,7 +1,7 @@
 # unist-util-source [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-[**Unist**][unist] utility to get the source of a [Node][] or
-[Location][].
+[**Unist**][unist] utility to get the source of a [`Node`][node] or
+[`Position`][position].
 
 ## Installation
 
@@ -48,7 +48,7 @@ Now, running `node example` yields:
 
 ###### Parameters
 
-*   `value` ([`Node`][node] or [`Location`][location]) — Value to get
+*   `value` ([`Node`][node] or [`Position`][position]) — Value to get
 *   `doc` ([`VFile`][vfile] or `string`) — Document in which `value` exists
 
 ###### Returns
@@ -79,6 +79,6 @@ Now, running `node example` yields:
 
 [node]: https://github.com/syntax-tree/unist#node
 
-[location]: https://github.com/syntax-tree/unist#location
+[position]: https://github.com/syntax-tree/unist#position
 
 [vfile]: https://github.com/vfile/vfile
