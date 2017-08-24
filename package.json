@@ -15,18 +15,18 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
-  "dependencies": {
-    "vfile-location": "^2.0.1"
-  },
   "files": [
     "index.js"
   ],
+  "dependencies": {
+    "vfile-location": "^2.0.1"
+  },
   "devDependencies": {
     "browserify": "^14.1.0",
     "esmangle": "^1.0.1",
     "nyc": "^11.0.0",
-    "remark": "^7.0.0",
-    "remark-cli": "^3.0.0",
+    "remark": "^8.0.0",
+    "remark-cli": "^4.0.0",
     "remark-preset-wooorm": "^3.0.0",
     "tape": "^4.0.0",
     "xo": "^0.18.0"
