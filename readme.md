@@ -55,6 +55,14 @@ Now, running `node example` yields:
 
 `string?` — Source of `value` in `file`, if available.
 
+## Contribute
+
+See [`contribute.md` in `syntax-tree/unist`][contribute] for ways to get
+started.
+
+This organisation has a [Code of Conduct][coc].  By interacting with this
+repository, organisation, or community you agree to abide by its terms.
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
@@ -82,3 +90,7 @@ Now, running `node example` yields:
 [position]: https://github.com/syntax-tree/unist#position
 
 [vfile]: https://github.com/vfile/vfile
+
+[contribute]: https://github.com/syntax-tree/unist/blob/master/contributing.md
+
+[coc]: https://github.com/syntax-tree/unist/blob/master/code-of-conduct.md
