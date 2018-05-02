@@ -23,16 +23,18 @@ Say we have the following file, `example.md`:
 And our script, `example.js`, looks as follows:
 
 ```javascript
-var vfile = require('to-vfile');
-var unified = require('unified');
-var parse = require('remark-parse');
-var source = require('unist-util-source');
+var vfile = require('to-vfile')
+var unified = require('unified')
+var parse = require('remark-parse')
+var source = require('unist-util-source')
 
-var file = vfile.readSync('example.md');
-var tree = unified().use(parse).parse(file);
+var file = vfile.readSync('example.md')
+var tree = unified()
+  .use(parse)
+  .parse(file)
 
-var list = tree.children[0].children[0];
-console.log(source(list, file));
+var list = tree.children[0].children[0]
+console.log(source(list, file))
 ```
 
 Now, running `node example` yields:
