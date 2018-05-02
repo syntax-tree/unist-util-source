@@ -5,3 +5,4 @@ coverage/
 node_modules/
 unist-util-source.js
 unist-util-source.min.js
+yarn.lock
