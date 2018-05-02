@@ -2,7 +2,7 @@
 
 var test = require('tape');
 var remark = require('remark');
-var source = require('./');
+var source = require('.');
 
 test('unist-util-source', function (t) {
   t.plan(10);
