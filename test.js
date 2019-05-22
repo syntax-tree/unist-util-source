@@ -15,38 +15,38 @@ test('unist-util-source', function(t) {
 
         t.equal(source(node, file), '> + **[Hello](./example)**\n> world.')
 
-        /* Blockquote. */
+        // Blockquote.
         node = tree.children[0]
         t.equal(source(node, file), '> + **[Hello](./example)**\n> world.')
 
-        /* List. */
+        // List.
         node = node.children[0]
         t.equal(source(node, file), '+ **[Hello](./example)**\nworld.')
 
-        /* List-item. */
+        // List-item.
         node = node.children[0]
         t.equal(source(node, file), '+ **[Hello](./example)**\nworld.')
 
-        /* Paragraph. */
+        // Paragraph.
         node = node.children[0]
         t.equal(source(node, file), '**[Hello](./example)**\nworld.')
 
-        /* Strong. */
+        // Strong.
         node = node.children[0]
         t.equal(source(node, file), '**[Hello](./example)**')
 
-        /* Link. */
+        // Link.
         node = node.children[0]
         t.equal(source(node, file), '[Hello](./example)')
 
-        /* Text. */
+        // Text.
         node = node.children[0]
         t.equal(source(node, file), 'Hello')
 
-        /* Generated. */
+        // Generated.
         t.equal(source({type: node.type, value: node.value}, file), null)
 
-        /* Missing. */
+        // Missing.
         t.equal(source(null, file), null)
       }
     })
