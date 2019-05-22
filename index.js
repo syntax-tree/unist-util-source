@@ -7,7 +7,7 @@ module.exports = source
 function source(value, file) {
   var doc = String(file)
   var loc = location(file)
-  var val = value && value.position ? value.position : value || {}
+  var val = (value && value.position) || value || {}
   var start
   var end
   var indents
