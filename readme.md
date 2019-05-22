@@ -1,4 +1,12 @@
-# unist-util-source [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# unist-util-source
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
+[![Sponsors][sponsors-badge]][collective]
+[![Backers][backers-badge]][collective]
+[![Chat][chat-badge]][chat]
 
 [**Unist**][unist] utility to get the source of a [`Node`][node] or
 [`Position`][position].
@@ -71,13 +79,31 @@ repository, organisation, or community you agree to abide by its terms.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/syntax-tree/unist-util-source.svg
+[build-badge]: https://img.shields.io/travis/syntax-tree/unist-util-source.svg
 
-[travis]: https://travis-ci.org/syntax-tree/unist-util-source
+[build]: https://travis-ci.org/syntax-tree/unist-util-source
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/syntax-tree/unist-util-source.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/syntax-tree/unist-util-source.svg
 
-[codecov]: https://codecov.io/github/syntax-tree/unist-util-source
+[coverage]: https://codecov.io/github/syntax-tree/unist-util-source
+
+[downloads-badge]: https://img.shields.io/npm/dm/unist-util-source.svg
+
+[downloads]: https://www.npmjs.com/package/unist-util-source
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/unist-util-source.svg
+
+[size]: https://bundlephobia.com/result?p=unist-util-source
+
+[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
+
+[backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[collective]: https://opencollective.com/unified
+
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/syntax-tree
 
 [npm]: https://docs.npmjs.com/cli/install
 
