@@ -18,7 +18,7 @@
 npm install unist-util-source
 ```
 
-## Usage
+## Use
 
 Say we have the following file, `example.md`:
 
@@ -29,7 +29,7 @@ Say we have the following file, `example.md`:
 
 And our script, `example.js`, looks as follows:
 
-```javascript
+```js
 var vfile = require('to-vfile')
 var unified = require('unified')
 var parse = require('remark-parse')
@@ -102,7 +102,7 @@ abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[chat-badge]: https://img.shields.io/badge/chat-spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/syntax-tree
 
