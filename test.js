@@ -4,11 +4,11 @@ var test = require('tape')
 var remark = require('remark')
 var source = require('.')
 
-test('unist-util-source', function(t) {
+test('unist-util-source', function (t) {
   t.plan(10)
 
   remark()
-    .use(function() {
+    .use(function () {
       return transformer
       function transformer(tree, file) {
         var node = tree

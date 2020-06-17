@@ -7,7 +7,7 @@ module.exports = source
 function source(value, file) {
   var doc = String(file)
   var loc = location(file)
-  var val = (value && value.position) || value || {}
+  var position = (value && value.position) || value || {}
   var start
   var end
   var indents
@@ -16,9 +16,9 @@ function source(value, file) {
   var length
   var index
 
-  start = loc.toOffset(val.start)
-  end = loc.toOffset(val.end)
-  indents = val.indent || []
+  start = loc.toOffset(position.start)
+  end = loc.toOffset(position.end)
+  indents = position.indent || []
 
   if (start === -1 || end === -1) {
     return null
