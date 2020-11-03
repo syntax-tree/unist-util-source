@@ -40,15 +40,14 @@ var tree = unified()
   .use(parse)
   .parse(file)
 
-var list = tree.children[0].children[0]
-console.log(source(list, file))
+var strong = tree.children[0].children[0].children[0].children[0].children[0]
+console.log(source(strong, file))
 ```
 
 Now, running `node example` yields:
 
 ```markdown
-+ **[Hello](./example)**
-  world.
+**[Hello](./example)**
 ```
 
 ## API
@@ -70,7 +69,7 @@ See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
 started.
 See [`support.md`][support] for ways to get help.
 
-This project has a [Code of Conduct][coc].
+This project has a [code of conduct][coc].
 By interacting with this repository, organisation, or community you agree to
 abide by its terms.
 

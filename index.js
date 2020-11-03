@@ -4,34 +4,34 @@ var location = require('vfile-location')
 
 module.exports = source
 
+var search = /\r?\n|\r/g
+
 function source(value, file) {
   var doc = String(file)
   var loc = location(file)
   var position = (value && value.position) || value || {}
-  var start
+  var startOffset = loc.toOffset(position.start)
+  var endOffset = loc.toOffset(position.end)
+  var results = []
+  var match
   var end
-  var indents
-  var indent
-  var lines
-  var length
-  var index
 
-  start = loc.toOffset(position.start)
-  end = loc.toOffset(position.end)
-  indents = position.indent || []
-
-  if (start === -1 || end === -1) {
+  if (startOffset === -1 || endOffset === -1) {
     return null
   }
 
-  lines = doc.slice(start, end).split('\n')
-  length = lines.length
-  index = 0
+  while (startOffset < endOffset) {
+    search.lastIndex = startOffset
+    match = search.exec(doc)
+    end = match && match.index < endOffset ? match.index : endOffset
+    results.push(doc.slice(startOffset, end))
+    startOffset = end
 
-  while (++index < length) {
-    indent = indents[index - 1]
-    lines[index] = lines[index].slice(indent ? indent - 1 : 0)
+    if (match && match.index < endOffset) {
+      startOffset += match[0].length
+      results.push(match[0])
+    }
   }
 
-  return lines.join('\n')
+  return results.join('')
 }

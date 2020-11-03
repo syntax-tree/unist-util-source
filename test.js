@@ -1,54 +1,64 @@
 'use strict'
 
 var test = require('tape')
+var vfile = require('vfile')
 var remark = require('remark')
 var source = require('.')
 
 test('unist-util-source', function (t) {
-  t.plan(10)
+  var file = vfile('> + **[Hello](./example)**\n> world.')
+  var node = remark().parse(file)
 
-  remark()
-    .use(function () {
-      return transformer
-      function transformer(tree, file) {
-        var node = tree
+  t.equal(source(node, file), '> + **[Hello](./example)**\n> world.', 'root')
 
-        t.equal(source(node, file), '> + **[Hello](./example)**\n> world.')
+  node = node.children[0]
+  t.equal(
+    source(node, file),
+    '> + **[Hello](./example)**\n> world.',
+    'block quote'
+  )
 
-        // Blockquote.
-        node = tree.children[0]
-        t.equal(source(node, file), '> + **[Hello](./example)**\n> world.')
+  node = node.children[0]
+  t.equal(source(node, file), '+ **[Hello](./example)**\n> world.', 'list')
 
-        // List.
-        node = node.children[0]
-        t.equal(source(node, file), '+ **[Hello](./example)**\nworld.')
+  node = node.children[0]
+  t.equal(source(node, file), '+ **[Hello](./example)**\n> world.', 'list item')
 
-        // List-item.
-        node = node.children[0]
-        t.equal(source(node, file), '+ **[Hello](./example)**\nworld.')
+  node = node.children[0]
+  t.equal(source(node, file), '**[Hello](./example)**\n> world.', 'paragraph')
 
-        // Paragraph.
-        node = node.children[0]
-        t.equal(source(node, file), '**[Hello](./example)**\nworld.')
+  node = node.children[0]
+  t.equal(source(node, file), '**[Hello](./example)**', 'strong')
 
-        // Strong.
-        node = node.children[0]
-        t.equal(source(node, file), '**[Hello](./example)**')
+  node = node.children[0]
+  t.equal(source(node, file), '[Hello](./example)', 'link')
 
-        // Link.
-        node = node.children[0]
-        t.equal(source(node, file), '[Hello](./example)')
+  node = node.children[0]
+  t.equal(source(node, file), 'Hello', 'text')
 
-        // Text.
-        node = node.children[0]
-        t.equal(source(node, file), 'Hello')
+  t.equal(source({type: node.type, value: node.value}, file), null, 'generated')
 
-        // Generated.
-        t.equal(source({type: node.type, value: node.value}, file), null)
+  t.equal(source(null, file), null, 'missing')
 
-        // Missing.
-        t.equal(source(null, file), null)
-      }
-    })
-    .processSync(['> + **[Hello](./example)**', '> world.'].join('\n'))
+  file = vfile('a\r\nb')
+  node = remark().parse(file).children[0]
+
+  t.equal(source(node, file), 'a\r\nb', 'cr + lf')
+
+  file = vfile('a\rb')
+  node = remark().parse(file).children[0]
+
+  t.equal(source(node, file), 'a\rb', 'cr')
+
+  file = vfile('a\n')
+  node = remark().parse(file)
+
+  t.equal(source(node, file), 'a\n', 'eof eol')
+
+  file = vfile('a\n\rb')
+  node = remark().parse(file)
+
+  t.equal(source(node, file), 'a\n\rb', 'blank lines')
+
+  t.end()
 })
