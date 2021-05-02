@@ -55,7 +55,7 @@ Now, running `node example` yields:
 
 ## API
 
-### `source(value, doc)`
+### `source(value, file)`
 
 This package exports the following identifiers: `source`.
 There is no default export.
@@ -63,7 +63,7 @@ There is no default export.
 ###### Parameters
 
 *   `value` ([`Node`][node] or [`Position`][position]) — Value to get
-*   `doc` ([`VFile`][vfile] or `string`) — [file][] in which `value` exists
+*   `file` ([`VFile`][vfile] or `string`) — [file][] in which `value` exists
 
 ###### Returns
 

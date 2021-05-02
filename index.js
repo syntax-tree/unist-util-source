@@ -2,14 +2,24 @@ import location from 'vfile-location'
 
 var search = /\r?\n|\r/g
 
+/**
+ * @param {import('unist').Node|import('unist').Position} value Value to get
+ * @param {import('vfile').VFile|string} file File in which `value` exists
+ * @returns {string|null}
+ */
 export function source(value, file) {
   var doc = String(file)
   var loc = location(file)
+  /** @type {import('unist').Position} */
+  // @ts-ignore Looks like a node.
   var position = (value && value.position) || value || {}
   var startOffset = loc.toOffset(position.start)
   var endOffset = loc.toOffset(position.end)
+  /** @type {Array.<string>} */
   var results = []
+  /** @type {RegExpMatchArray} */
   var match
+  /** @type {number} */
   var end
 
   if (startOffset === -1 || endOffset === -1) {
