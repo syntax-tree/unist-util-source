@@ -1,9 +1,7 @@
-'use strict'
-
-var test = require('tape')
-var vfile = require('vfile')
-var remark = require('remark')
-var source = require('.')
+import test from 'tape'
+import vfile from 'vfile'
+import remark from 'remark'
+import {source} from './index.js'
 
 test('unist-util-source', function (t) {
   var file = vfile('> + **[Hello](./example)**\n> world.')

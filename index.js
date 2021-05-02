@@ -1,12 +1,8 @@
-'use strict'
-
-var location = require('vfile-location')
-
-module.exports = source
+import location from 'vfile-location'
 
 var search = /\r?\n|\r/g
 
-function source(value, file) {
+export function source(value, file) {
   var doc = String(file)
   var loc = location(file)
   var position = (value && value.position) || value || {}

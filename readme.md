@@ -12,6 +12,9 @@
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -30,14 +33,14 @@ Say we have the following file, `example.md`:
 And our script, `example.js`, looks as follows:
 
 ```js
-var vfile = require('to-vfile')
-var unified = require('unified')
-var parse = require('remark-parse')
-var source = require('unist-util-source')
+import vfile from 'to-vfile'
+import unified from 'unified'
+import remarkParse from 'remark-parse'
+import {source} from 'unist-util-source'
 
 var file = vfile.readSync('example.md')
 var tree = unified()
-  .use(parse)
+  .use(remarkParse)
   .parse(file)
 
 var strong = tree.children[0].children[0].children[0].children[0].children[0]
@@ -53,6 +56,9 @@ Now, running `node example` yields:
 ## API
 
 ### `source(value, doc)`
+
+This package exports the following identifiers: `source`.
+There is no default export.
 
 ###### Parameters
 
