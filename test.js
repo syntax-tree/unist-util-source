@@ -1,10 +1,10 @@
 import test from 'tape'
-import vfile from 'vfile'
 import remark from 'remark'
+import {VFile} from 'vfile'
 import {source} from './index.js'
 
 test('unist-util-source', function (t) {
-  var file = vfile('> + **[Hello](./example)**\n> world.')
+  var file = new VFile('> + **[Hello](./example)**\n> world.')
   var node = remark().parse(file)
 
   t.equal(source(node, file), '> + **[Hello](./example)**\n> world.', 'root')
@@ -38,22 +38,22 @@ test('unist-util-source', function (t) {
 
   t.equal(source(null, file), null, 'missing')
 
-  file = vfile('a\r\nb')
+  file = new VFile('a\r\nb')
   node = remark().parse(file).children[0]
 
   t.equal(source(node, file), 'a\r\nb', 'cr + lf')
 
-  file = vfile('a\rb')
+  file = new VFile('a\rb')
   node = remark().parse(file).children[0]
 
   t.equal(source(node, file), 'a\rb', 'cr')
 
-  file = vfile('a\n')
+  file = new VFile('a\n')
   node = remark().parse(file)
 
   t.equal(source(node, file), 'a\n', 'eof eol')
 
-  file = vfile('a\n\rb')
+  file = new VFile('a\n\rb')
   node = remark().parse(file)
 
   t.equal(source(node, file), 'a\n\rb', 'blank lines')

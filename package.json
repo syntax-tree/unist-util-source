@@ -32,8 +32,8 @@
   ],
   "dependencies": {
     "@types/unist": "^2.0.0",
-    "vfile": "^4.0.0",
-    "vfile-location": "^3.0.0"
+    "vfile": "^5.0.0",
+    "vfile-location": "^4.0.0"
   },
   "devDependencies": {
     "@types/tape": "^4.0.0",

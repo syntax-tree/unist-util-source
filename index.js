@@ -1,10 +1,10 @@
-import location from 'vfile-location'
+import {location} from 'vfile-location'
 
 var search = /\r?\n|\r/g
 
 /**
  * @param {import('unist').Node|import('unist').Position} value Value to get
- * @param {import('vfile').VFile|string} file File in which `value` exists
+ * @param {import('vfile').VFile|import('vfile').VFileValue} file File in which `value` exists
  * @returns {string|null}
  */
 export function source(value, file) {
