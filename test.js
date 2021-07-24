@@ -57,6 +57,7 @@ test('unist-util-source', (t) => {
     'generated'
   )
 
+  // @ts-expect-error: runtime.
   t.equal(source(null, file), null, 'missing')
 
   file = new VFile('a\r\nb')
