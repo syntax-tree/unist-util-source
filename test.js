@@ -10,11 +10,11 @@ import remark from 'remark'
 import {VFile} from 'vfile'
 import {source} from './index.js'
 
-test('unist-util-source', function (t) {
-  var file = new VFile('> + **[Hello](./example)**\n> world.')
+test('unist-util-source', (t) => {
+  let file = new VFile('> + **[Hello](./example)**\n> world.')
   /** @type {Node} */
   // @ts-expect-error: hush.
-  var node = remark().parse(file)
+  let node = remark().parse(file)
 
   t.equal(source(node, file), '> + **[Hello](./example)**\n> world.', 'root')
 

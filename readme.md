@@ -33,13 +33,13 @@ Say we have the following file, `example.md`:
 And our script, `example.js`, looks as follows:
 
 ```js
-import {toVFile} from 'to-vfile'
-import unified from 'unified'
+import {readSync} from 'to-vfile'
+import {unified} from 'unified'
 import remarkParse from 'remark-parse'
 import {source} from 'unist-util-source'
 
-var file = toVFile.readSync('example.md')
-var tree = unified()
+const file = readSync('example.md')
+const tree = unified()
   .use(remarkParse)
   .parse(file)
 

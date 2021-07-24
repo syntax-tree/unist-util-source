@@ -1,6 +1,6 @@
 import {location} from 'vfile-location'
 
-var search = /\r?\n|\r/g
+const search = /\r?\n|\r/g
 
 /**
  * @param {import('unist').Node|import('unist').Position} value Value to get
@@ -8,28 +8,25 @@ var search = /\r?\n|\r/g
  * @returns {string|null}
  */
 export function source(value, file) {
-  var doc = String(file)
-  var loc = location(file)
+  const doc = String(file)
+  const loc = location(file)
   /** @type {import('unist').Position} */
-  // @ts-ignore Looks like a node.
-  var position = (value && value.position) || value || {}
-  var startOffset = loc.toOffset(position.start)
-  var endOffset = loc.toOffset(position.end)
-  /** @type {Array.<string>} */
-  var results = []
-  /** @type {RegExpMatchArray} */
-  var match
-  /** @type {number} */
-  var end
+  // @ts-expect-error Looks like a node.
+  const position = (value && value.position) || value || {}
+  const endOffset = loc.toOffset(position.end)
+  let startOffset = loc.toOffset(position.start)
 
-  if (startOffset === -1 || endOffset === -1) {
+  if (endOffset === -1 || startOffset === -1) {
     return null
   }
 
+  /** @type {Array.<string>} */
+  const results = []
+
   while (startOffset < endOffset) {
     search.lastIndex = startOffset
-    match = search.exec(doc)
-    end = match && match.index < endOffset ? match.index : endOffset
+    const match = search.exec(doc)
+    const end = match && match.index < endOffset ? match.index : endOffset
     results.push(doc.slice(startOffset, end))
     startOffset = end
 
