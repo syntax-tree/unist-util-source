@@ -6,14 +6,14 @@
 
 import assert from 'node:assert'
 import test from 'tape'
-import {remark} from 'remark'
+import {fromMarkdown} from 'mdast-util-from-markdown'
 import {VFile} from 'vfile'
 import {source} from './index.js'
 
 test('unist-util-source', (t) => {
   let file = new VFile('> + **[Hello](./example)**\n> world.')
   /** @type {Node} */
-  let node = remark().parse(file)
+  let node = fromMarkdown(String(file))
 
   t.equal(source(node, file), '> + **[Hello](./example)**\n> world.', 'root')
 
@@ -60,7 +60,7 @@ test('unist-util-source', (t) => {
   t.equal(source(null, file), null, 'missing')
 
   file = new VFile('a\r\nb')
-  node = remark().parse(file)
+  node = fromMarkdown(String(file))
   assert(node.type === 'root')
   node = node.children[0]
   assert(node.type === 'paragraph')
@@ -68,7 +68,7 @@ test('unist-util-source', (t) => {
   t.equal(source(node, file), 'a\r\nb', 'cr + lf')
 
   file = new VFile('a\rb')
-  node = remark().parse(file)
+  node = fromMarkdown(String(file))
   assert(node.type === 'root')
   node = node.children[0]
   assert(node.type === 'paragraph')
@@ -76,12 +76,12 @@ test('unist-util-source', (t) => {
   t.equal(source(node, file), 'a\rb', 'cr')
 
   file = new VFile('a\n')
-  node = remark().parse(file)
+  node = fromMarkdown(String(file))
 
   t.equal(source(node, file), 'a\n', 'eof eol')
 
   file = new VFile('a\n\rb')
-  node = remark().parse(file)
+  node = fromMarkdown(String(file))
 
   t.equal(source(node, file), 'a\n\rb', 'blank lines')
 
