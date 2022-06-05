@@ -17,7 +17,7 @@ const search = /\r?\n|\r/g
  * @param {VFile|VFileValue} file
  *   File in which `value` exists.
  * @returns {string|null}
- *   Source of a node.
+ *   Source of `value` in `doc`, if available.
  */
 export function source(value, file) {
   const doc = String(file)

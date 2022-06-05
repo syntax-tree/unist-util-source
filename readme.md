@@ -8,46 +8,77 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**unist**][unist] utility to get the source of a node or at a position.
+[unist][] utility to get the source code of a node or position.
+
+## Contents
+
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`source(value, file)`](#sourcevalue-file)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This is a tiny utility that lets you get the source code of a node or position.
+
+## When should I use this?
+
+This is super tiny utility useful when you want to display the source code
+of something in a file.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only][esm].
+In Node.js (version 12.20+, 14.14+, 16.0+, 18.0+), install with [npm][]:
 
 ```sh
 npm install unist-util-source
 ```
 
+In Deno with [`esm.sh`][esmsh]:
+
+```js
+import {source} from "https://esm.sh/unist-util-source@4"
+```
+
+In browsers with [`esm.sh`][esmsh]:
+
+```html
+<script type="module">
+  import {source} from "https://esm.sh/unist-util-source@4?bundle"
+</script>
+```
+
 ## Use
 
-Say we have the following file, `example.md`:
+Say our document `example.md` contains:
 
 ```markdown
 > + **[Hello](./example)**
 >   world.
 ```
 
-And our script, `example.js`, looks as follows:
+…and our module `example.js` looks as follows:
 
 ```js
-import {readSync} from 'to-vfile'
-import {unified} from 'unified'
-import remarkParse from 'remark-parse'
+import {read} from 'to-vfile'
+import {fromMarkdown} from 'mdast-util-from-markdown'
 import {source} from 'unist-util-source'
 
-const file = readSync('example.md')
-const tree = unified()
-  .use(remarkParse)
-  .parse(file)
+const file = await read('example.md')
+const tree = fromMarkdown(String(file))
 
-var strong = tree.children[0].children[0].children[0].children[0].children[0]
+const strong = tree.children[0].children[0].children[0].children[0].children[0]
 console.log(source(strong, file))
 ```
 
-Now, running `node example` yields:
+…now running `node example.js` yields:
 
 ```markdown
 **[Hello](./example)**
@@ -55,24 +86,38 @@ Now, running `node example` yields:
 
 ## API
 
+This package exports the identifier `source`.
+There is no default export.
+
 ### `source(value, file)`
 
-This package exports the following identifiers: `source`.
-There is no default export.
+Get the source of a node or at a position.
 
 ###### Parameters
 
-*   `value` ([`Node`][node] or [`Position`][position]) — Value to get
-*   `file` ([`VFile`][vfile] or `string`) — [file][] in which `value` exists
+*   `value` ([`Node`][node] or [`Position`][position]) — value to get
+*   `file` ([`VFile`][vfile] or `string`) — file in which `value` exists
 
 ###### Returns
 
-`string?` — Source of `value` in `doc`, if available.
+Source of `value` in `doc`, if available (`string?`).
+
+## Types
+
+This package is fully typed with [TypeScript][].
+It exports no additional types.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Contribute
 
-See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
-started.
+See [`contributing.md`][contributing] in [`syntax-tree/.github`][health] for
+ways to get started.
 See [`support.md`][support] for ways to get help.
 
 This project has a [code of conduct][coc].
@@ -113,15 +158,23 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[esmsh]: https://esm.sh
+
+[typescript]: https://www.typescriptlang.org
+
 [license]: license
 
 [author]: https://wooorm.com
 
-[contributing]: https://github.com/syntax-tree/.github/blob/HEAD/contributing.md
+[health]: https://github.com/syntax-tree/.github
 
-[support]: https://github.com/syntax-tree/.github/blob/HEAD/support.md
+[contributing]: https://github.com/syntax-tree/.github/blob/main/contributing.md
 
-[coc]: https://github.com/syntax-tree/.github/blob/HEAD/code-of-conduct.md
+[support]: https://github.com/syntax-tree/.github/blob/main/support.md
+
+[coc]: https://github.com/syntax-tree/.github/blob/main/code-of-conduct.md
 
 [unist]: https://github.com/syntax-tree/unist
 
@@ -130,5 +183,3 @@ abide by its terms.
 [position]: https://github.com/syntax-tree/unist#position
 
 [vfile]: https://github.com/vfile/vfile
-
-[file]: https://github.com/syntax-tree/unist#file
