@@ -1,11 +1,23 @@
+/**
+ * @typedef {import('unist').Node} Node
+ * @typedef {import('unist').Position} Position
+ * @typedef {import('vfile').VFile} VFile
+ * @typedef {import('vfile').VFileValue} VFileValue
+ */
+
 import {location} from 'vfile-location'
 
 const search = /\r?\n|\r/g
 
 /**
- * @param {import('unist').Node|import('unist').Position} value Value to get
- * @param {import('vfile').VFile|import('vfile').VFileValue} file File in which `value` exists
+ * Get the source of a node or at a position.
+ *
+ * @param {Node|Position} value
+ *   Value to get.
+ * @param {VFile|VFileValue} file
+ *   File in which `value` exists.
  * @returns {string|null}
+ *   Source of a node.
  */
 export function source(value, file) {
   const doc = String(file)
