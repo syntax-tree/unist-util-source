@@ -6,14 +6,13 @@
 
 import assert from 'node:assert'
 import test from 'tape'
-import remark from 'remark'
+import {remark} from 'remark'
 import {VFile} from 'vfile'
 import {source} from './index.js'
 
 test('unist-util-source', (t) => {
   let file = new VFile('> + **[Hello](./example)**\n> world.')
   /** @type {Node} */
-  // @ts-expect-error: hush.
   let node = remark().parse(file)
 
   t.equal(source(node, file), '> + **[Hello](./example)**\n> world.', 'root')
@@ -61,7 +60,6 @@ test('unist-util-source', (t) => {
   t.equal(source(null, file), null, 'missing')
 
   file = new VFile('a\r\nb')
-  // @ts-expect-error: hush.
   node = remark().parse(file)
   assert(node.type === 'root')
   node = node.children[0]
@@ -70,7 +68,6 @@ test('unist-util-source', (t) => {
   t.equal(source(node, file), 'a\r\nb', 'cr + lf')
 
   file = new VFile('a\rb')
-  // @ts-expect-error: hush.
   node = remark().parse(file)
   assert(node.type === 'root')
   node = node.children[0]
@@ -79,13 +76,11 @@ test('unist-util-source', (t) => {
   t.equal(source(node, file), 'a\rb', 'cr')
 
   file = new VFile('a\n')
-  // @ts-expect-error: hush.
   node = remark().parse(file)
 
   t.equal(source(node, file), 'a\n', 'eof eol')
 
   file = new VFile('a\n\rb')
-  // @ts-expect-error: hush.
   node = remark().parse(file)
 
   t.equal(source(node, file), 'a\n\rb', 'blank lines')
