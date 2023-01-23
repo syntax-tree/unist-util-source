@@ -9,8 +9,15 @@ import test from 'node:test'
 import {fromMarkdown} from 'mdast-util-from-markdown'
 import {VFile} from 'vfile'
 import {source} from './index.js'
+import * as mod from './index.js'
 
-test('unist-util-source', () => {
+test('source', () => {
+  assert.deepEqual(
+    Object.keys(mod).sort(),
+    ['source'],
+    'should expose the public api'
+  )
+
   let file = new VFile('> + **[Hello](./example)**\n> world.')
   /** @type {Node} */
   let node = fromMarkdown(String(file))
