@@ -50,13 +50,27 @@ test('unist-util-source', (t) => {
   assert(node.type === 'text')
   t.equal(source(node, file), 'Hello', 'text')
 
+  t.equal(source(node.position, file), 'Hello', 'position')
+
   t.equal(
-    source(/** @type {Text} */ ({type: node.type, value: node.value}), file),
+    source(
+      /** @type {Text} */ ({
+        type: 'text',
+        value: 'qwe',
+        position: {start: {line: 0, column: 0}, end: {line: 0, column: 0}}
+      }),
+      file
+    ),
+    null,
+    'out of bounds data'
+  )
+
+  t.equal(
+    source(/** @type {Text} */ ({type: 'text', value: 'qwe'}), file),
     null,
     'generated'
   )
 
-  // @ts-expect-error: runtime.
   t.equal(source(null, file), null, 'missing')
 
   file = new VFile('a\r\nb')
