@@ -35,7 +35,7 @@ of something in a file.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, 16.0+, 18.0+), install with [npm][]:
+In Node.js (version 14.14+ and 16.0+), install with [npm][]:
 
 ```sh
 npm install unist-util-source
@@ -44,14 +44,14 @@ npm install unist-util-source
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {source} from "https://esm.sh/unist-util-source@4"
+import {source} from 'https://esm.sh/unist-util-source@4'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {source} from "https://esm.sh/unist-util-source@4?bundle"
+  import {source} from 'https://esm.sh/unist-util-source@4?bundle'
 </script>
 ```
 
@@ -86,7 +86,7 @@ console.log(source(strong, file))
 
 ## API
 
-This package exports the identifier `source`.
+This package exports the identifier [`source`][source].
 There is no default export.
 
 ### `source(value, file)`
@@ -95,12 +95,14 @@ Get the source of a node or at a position.
 
 ###### Parameters
 
-*   `value` ([`Node`][node] or [`Position`][position]) — value to get
-*   `file` ([`VFile`][vfile] or `string`) — file in which `value` exists
+*   `value` ([`Node`][node] or [`Position`][position])
+    — value to get
+*   `file` ([`VFile`][vfile] or `string`)
+    — file in which `value` exists
 
 ###### Returns
 
-Source of `value` in `doc`, if available (`string?`).
+Source of `value` in `doc`, if available (`string` or `null`).
 
 ## Types
 
@@ -111,7 +113,7 @@ It exports no additional types.
 
 Projects maintained by the unified collective are compatible with all maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+As of now, that is Node.js 14.14+ and 16.0+.
 Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Contribute
@@ -183,3 +185,5 @@ abide by its terms.
 [position]: https://github.com/syntax-tree/unist#position
 
 [vfile]: https://github.com/vfile/vfile
+
+[source]: #sourcevalue-file
