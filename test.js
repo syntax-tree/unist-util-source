@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {fromMarkdown} from 'mdast-util-from-markdown'
+import {source} from 'unist-util-source'
 import {VFile} from 'vfile'
-import {source} from './index.js'
 
 test('source', async function (t) {
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('./index.js')).sort(), ['source'])
+    assert.deepEqual(Object.keys(await import('unist-util-source')).sort(), [
+      'source'
+    ])
   })
 
   const file = new VFile('> + **[Hello](./example)**\n> world.')
