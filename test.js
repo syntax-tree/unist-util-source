@@ -1,120 +1,113 @@
-/**
- * @typedef {import('mdast').Root} Root
- * @typedef {import('mdast').Text} Text
- * @typedef {Root['children'][number]|Root} Node
- */
-
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {fromMarkdown} from 'mdast-util-from-markdown'
 import {VFile} from 'vfile'
 import {source} from './index.js'
-import * as mod from './index.js'
 
-test('source', () => {
-  assert.deepEqual(
-    Object.keys(mod).sort(),
-    ['source'],
-    'should expose the public api'
-  )
+test('source', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(Object.keys(await import('./index.js')).sort(), ['source'])
+  })
 
-  let file = new VFile('> + **[Hello](./example)**\n> world.')
-  /** @type {Node} */
-  let node = fromMarkdown(String(file))
+  const file = new VFile('> + **[Hello](./example)**\n> world.')
+  const tree = fromMarkdown(String(file))
+  const blockquote = tree.children[0]
+  assert(blockquote.type === 'blockquote')
+  const list = blockquote.children[0]
+  assert(list.type === 'list')
+  const listItem = list.children[0]
+  const paragraph = listItem.children[0]
+  assert(paragraph.type === 'paragraph')
+  const strong = paragraph.children[0]
+  assert(strong.type === 'strong')
+  const link = strong.children[0]
+  assert(link.type === 'link')
+  const text = link.children[0]
+  assert(text.type === 'text')
 
-  assert.equal(
-    source(node, file),
-    '> + **[Hello](./example)**\n> world.',
-    'root'
-  )
+  await t.test('should support a root', async function () {
+    assert.equal(source(tree, file), '> + **[Hello](./example)**\n> world.')
+  })
 
-  assert(node.type === 'root')
-  node = node.children[0]
-  assert(node.type === 'blockquote')
-  assert.equal(
-    source(node, file),
-    '> + **[Hello](./example)**\n> world.',
-    'block quote'
-  )
+  await t.test('should support a block quote', async function () {
+    assert.equal(
+      source(blockquote, file),
+      '> + **[Hello](./example)**\n> world.'
+    )
+  })
 
-  node = node.children[0]
-  assert(node.type === 'list')
-  assert.equal(source(node, file), '+ **[Hello](./example)**\n> world.', 'list')
+  await t.test('should support a list', async function () {
+    assert.equal(source(list, file), '+ **[Hello](./example)**\n> world.')
+  })
 
-  node = node.children[0]
-  assert(node.type === 'listItem')
-  assert.equal(
-    source(node, file),
-    '+ **[Hello](./example)**\n> world.',
-    'list item'
-  )
+  await t.test('should support a list item', async function () {
+    assert.equal(source(listItem, file), '+ **[Hello](./example)**\n> world.')
+  })
 
-  node = node.children[0]
-  assert(node.type === 'paragraph')
-  assert.equal(
-    source(node, file),
-    '**[Hello](./example)**\n> world.',
-    'paragraph'
-  )
+  await t.test('should support a paragraph', async function () {
+    assert.equal(source(paragraph, file), '**[Hello](./example)**\n> world.')
+  })
 
-  node = node.children[0]
-  assert(node.type === 'strong')
-  assert.equal(source(node, file), '**[Hello](./example)**', 'strong')
+  await t.test('should support strong', async function () {
+    assert.equal(source(strong, file), '**[Hello](./example)**')
+  })
 
-  node = node.children[0]
-  assert(node.type === 'link')
-  assert.equal(source(node, file), '[Hello](./example)', 'link')
+  await t.test('should support a link', async function () {
+    assert.equal(source(link, file), '[Hello](./example)')
+  })
 
-  node = node.children[0]
-  assert(node.type === 'text')
-  assert.equal(source(node, file), 'Hello', 'text')
+  await t.test('should support a text', async function () {
+    assert.equal(source(text, file), 'Hello')
+  })
 
-  assert.equal(source(node.position, file), 'Hello', 'position')
+  await t.test('should support a position', async function () {
+    assert.equal(source(text.position, file), 'Hello')
+  })
 
-  assert.equal(
-    source(
-      /** @type {Text} */ ({
-        type: 'text',
-        value: 'qwe',
-        position: {start: {line: 0, column: 0}, end: {line: 0, column: 0}}
-      }),
-      file
-    ),
-    null,
-    'out of bounds data'
-  )
+  await t.test('should support out of bounds data', async function () {
+    const text = {
+      type: 'text',
+      value: 'qwe',
+      position: {start: {line: 0, column: 0}, end: {line: 0, column: 0}}
+    }
+    assert.equal(source(text, file), null)
+  })
 
-  assert.equal(
-    source(/** @type {Text} */ ({type: 'text', value: 'qwe'}), file),
-    null,
-    'generated'
-  )
+  await t.test('should support a generated node', async function () {
+    const text = {type: 'text', value: 'qwe'}
+    assert.equal(source(text, file), null)
+  })
 
-  assert.equal(source(null, file), null, 'missing')
+  await t.test('should support a nullish node', async function () {
+    assert.equal(source(null, file), null)
+  })
 
-  file = new VFile('a\r\nb')
-  node = fromMarkdown(String(file))
-  assert(node.type === 'root')
-  node = node.children[0]
-  assert(node.type === 'paragraph')
+  await t.test('should support cr + lf', async function () {
+    const file = new VFile('a\r\nb')
+    const node = fromMarkdown(String(file))
+    const paragraph = node.children[0]
+    assert.equal(source(paragraph, file), 'a\r\nb')
+  })
 
-  assert.equal(source(node, file), 'a\r\nb', 'cr + lf')
+  await t.test('should support cr', async function () {
+    const file = new VFile('a\rb')
+    const node = fromMarkdown(String(file))
+    const paragraph = node.children[0]
 
-  file = new VFile('a\rb')
-  node = fromMarkdown(String(file))
-  assert(node.type === 'root')
-  node = node.children[0]
-  assert(node.type === 'paragraph')
+    assert.equal(source(paragraph, file), 'a\rb')
+  })
 
-  assert.equal(source(node, file), 'a\rb', 'cr')
+  await t.test('should support an eof eol', async function () {
+    const file = new VFile('a\n')
+    const node = fromMarkdown(String(file))
 
-  file = new VFile('a\n')
-  node = fromMarkdown(String(file))
+    assert.equal(source(node, file), 'a\n')
+  })
 
-  assert.equal(source(node, file), 'a\n', 'eof eol')
+  await t.test('should support an lf + cr (a blank line)', async function () {
+    const file = new VFile('a\n\rb')
+    const node = fromMarkdown(String(file))
 
-  file = new VFile('a\n\rb')
-  node = fromMarkdown(String(file))
-
-  assert.equal(source(node, file), 'a\n\rb', 'blank lines')
+    assert.equal(source(node, file), 'a\n\rb')
+  })
 })
