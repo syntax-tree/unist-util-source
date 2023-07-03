@@ -17,7 +17,7 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`source(value, file)`](#sourcevalue-file)
+    *   [`source(file[, value])`](#sourcefile-value)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Contribute](#contribute)
@@ -67,15 +67,15 @@ Say our document `example.md` contains:
 …and our module `example.js` looks as follows:
 
 ```js
-import {read} from 'to-vfile'
 import {fromMarkdown} from 'mdast-util-from-markdown'
+import {read} from 'to-vfile'
 import {source} from 'unist-util-source'
 
 const file = await read('example.md')
 const tree = fromMarkdown(String(file))
 
 const strong = tree.children[0].children[0].children[0].children[0].children[0]
-console.log(source(strong, file))
+console.log(source(file, strong))
 ```
 
 …now running `node example.js` yields:
@@ -89,16 +89,16 @@ console.log(source(strong, file))
 This package exports the identifier [`source`][source].
 There is no default export.
 
-### `source(value, file)`
+### `source(file[, value])`
 
 Get the source of a node or at a position.
 
 ###### Parameters
 
-*   `value` ([`Node`][node] or [`Position`][position])
-    — value to get
 *   `file` ([`VFile`][vfile] or `string`)
     — file in which `value` exists
+*   `value` ([`Node`][node], [`Position`][position], optional)
+    — value to get
 
 ###### Returns
 
@@ -189,4 +189,4 @@ abide by its terms.
 
 [vfile]: https://github.com/vfile/vfile
 
-[source]: #sourcevalue-file
+[source]: #sourcefile-value
