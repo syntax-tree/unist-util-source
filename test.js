@@ -70,16 +70,16 @@ test('source', async function (t) {
       value: 'qwe',
       position: {start: {line: 0, column: 0}, end: {line: 0, column: 0}}
     }
-    assert.equal(source(text, file), null)
+    assert.equal(source(text, file), undefined)
   })
 
   await t.test('should support a generated node', async function () {
     const text = {type: 'text', value: 'qwe'}
-    assert.equal(source(text, file), null)
+    assert.equal(source(text, file), undefined)
   })
 
   await t.test('should support a nullish node', async function () {
-    assert.equal(source(null, file), null)
+    assert.equal(source(null, file), undefined)
   })
 
   await t.test('should support cr + lf', async function () {

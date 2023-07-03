@@ -102,7 +102,7 @@ Get the source of a node or at a position.
 
 ###### Returns
 
-Source of `value` in `doc`, if available (`string` or `null`).
+Source of `value` in `doc`, if available (`string` or `undefined`).
 
 ## Types
 
