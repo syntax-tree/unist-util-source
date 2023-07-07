@@ -31,7 +31,7 @@
     "index.js"
   ],
   "dependencies": {
-    "@types/unist": "^2.0.0",
+    "@types/unist": "^3.0.0",
     "vfile": "^6.0.0",
     "vfile-location": "^5.0.0"
   },
